@@ -25,10 +25,18 @@ public class Menu : MonoBehaviour {
     }
     public void Decoder()
     {
-        MenuTarget.target = "Page3";
-        GameObject verifyPopup = Instantiate(popup, transform.position, transform.rotation);
-        verifyPopup.transform.SetParent(Body.transform, false);
+        
         //verifyPopup.name = "verifyPopup"; // đặt tên
+        if (webservices.userPer > 0)
+        {
+            MenuTarget.target = "Page3";
+            GameObject verifyPopup = Instantiate(popup, transform.position, transform.rotation);
+            verifyPopup.transform.SetParent(Body.transform, false);
+        }
+        else
+        {
+            Debug.Log("Không có quyền");
+        }
     }
     public void PlayerScore()
     {
