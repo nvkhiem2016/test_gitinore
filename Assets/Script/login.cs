@@ -5,12 +5,25 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
 
+
+[System.Serializable]
+public class User
+{
+    public string id;
+    public int per;
+    public Boolean success;
+    public static User CreateFromJSON(string jsonString)
+    {
+        return JsonUtility.FromJson<User>(jsonString);
+    }
+}
 public class login : MonoBehaviour {
 
     public GameObject id;
     public GameObject password;
     private string strid;
     private string strpassword;
+    
     // Use this for initialization
     public void RegisterButtonPressed()
     {
@@ -46,17 +59,28 @@ public class login : MonoBehaviour {
 
         if (request.isNetworkError)
         {
+            Debug.Log("OKE");
             Debug.LogError(request.error);
         }
         else
         {
             webservices.CookieString = request.GetResponseHeader("set-cookie");
+            
             Debug.Log(webservices.CookieString);
             Debug.Log(request.downloadHandler.text);
-            if(String.Compare(request.downloadHandler.text, "OK") == 0) //so sanh ket qua tra ve == 0K => correct
+            User user =User.CreateFromJSON(request.downloadHandler.text);// conver json string to Object
+
+
+            if (user.success == true) //so sanh ket qua : true là login ok
             {
+                webservices.userId = user.id;
+                webservices.userPer = user.per;
+                Debug.Log(webservices.userPer);
                 Load("Menu");
-                
+            }
+            else
+            {
+                Debug.Log("Lỗi ĐN");
             }
 
         }

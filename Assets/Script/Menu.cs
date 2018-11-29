@@ -6,25 +6,42 @@ using UnityEngine.SceneManagement;
 using System;
 
 public class Menu : MonoBehaviour {
-
+    public GameObject popup;
+    public GameObject Body;
     public void Enablegame()
     {
-        Load("Page1");
+
+        if (webservices.userPer > 0)
+        {
+            MenuTarget.target = "Page1";
+            GameObject verifyPopup = Instantiate(popup, transform.position, transform.rotation);
+            verifyPopup.transform.SetParent(Body.transform, false);
+        }
+        else
+        {
+            Debug.Log("Không có quyền");
+        }
 
     }
     public void Decoder()
     {
-        Load("Page3");
-
+        MenuTarget.target = "Page3";
+        GameObject verifyPopup = Instantiate(popup, transform.position, transform.rotation);
+        verifyPopup.transform.SetParent(Body.transform, false);
+        //verifyPopup.name = "verifyPopup"; // đặt tên
     }
     public void PlayerScore()
     {
-        Load("Page4");
+        MenuTarget.target = "Page4";
+        GameObject verifyPopup = Instantiate(popup, transform.position, transform.rotation);
+        verifyPopup.transform.SetParent(Body.transform, false);
 
     }
     public void GameController()
     {
-        Load("Page6");
+        MenuTarget.target = "Page6";
+        GameObject verifyPopup = Instantiate(popup, transform.position, transform.rotation);
+        verifyPopup.transform.SetParent(Body.transform, false);
 
     }
     public void Logout()

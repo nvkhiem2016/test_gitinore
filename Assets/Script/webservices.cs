@@ -7,7 +7,7 @@ using System.IO;
 public class webservices : MonoBehaviour
 {
 
-    static string baseURL = "http://192.168.1.109:3000";
+    static string baseURL = "http://127.0.0.1:3000";
 
     public static string CookieString
     {
@@ -20,7 +20,28 @@ public class webservices : MonoBehaviour
             PlayerPrefs.SetString("cookie", value);
         }
     }
-
+    public static string userId
+    {
+        get
+        {
+            return PlayerPrefs.GetString("id");
+        }
+        set
+        {
+            PlayerPrefs.SetString("id", value);
+        }
+    }
+    public static int userPer
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("per");
+        }
+        set
+        {
+            PlayerPrefs.SetInt("per", value);
+        }
+    }
     public static string BuildUrl(string path)
     {
         return Path.Combine(baseURL, path).Replace(Path.DirectorySeparatorChar, '/');
